@@ -25,8 +25,8 @@ public class TimeEntryController {
     }
 
     @GetMapping("/time-entries/{id}")
-    public ResponseEntity<TimeEntry> read(@PathVariable(name="id") long timeEntryId) {
-        TimeEntry timeEntry = timeEntryRepository.find(timeEntryId);
+    public ResponseEntity<TimeEntry> read(@PathVariable(name = "id") long id) {
+        TimeEntry timeEntry = timeEntryRepository.find(id);
         ResponseEntity<TimeEntry> responseEntity;
         if (timeEntry != null) {
             responseEntity = new ResponseEntity<>(timeEntry, HttpStatus.OK);
