@@ -31,6 +31,14 @@ public class TimeEntry {
         this.date = date;
     }
 
+    public TimeEntry(long id, TimeEntry any) {
+        this.id = id;
+        this.projectId = any.getProjectId();
+        this.userId = any.getUserId();
+        this.hours = any.getHours();
+        this.date = any.getDate();
+    }
+
 
     public long getId() {
         return id;
