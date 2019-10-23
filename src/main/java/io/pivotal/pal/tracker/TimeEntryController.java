@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/time-entries")
 public class TimeEntryController {
 
     @Autowired
@@ -17,14 +18,14 @@ public class TimeEntryController {
         this.timeEntryRepository = timeEntryRepository;
     }
 
-    @PostMapping("/time-entries")
+    @PostMapping
         public ResponseEntity<TimeEntry> create(@RequestBody TimeEntry timeEntryToCreate) {
         TimeEntry newTimeEntry = timeEntryRepository.create(timeEntryToCreate);
         ResponseEntity<TimeEntry> responseEntity = new ResponseEntity<>(newTimeEntry, HttpStatus.CREATED);
         return responseEntity;
     }
 
-    @GetMapping("/time-entries/{id}")
+    @GetMapping("{id}")
     public ResponseEntity<TimeEntry> read(@PathVariable(name = "id") long id) {
         TimeEntry timeEntry = timeEntryRepository.find(id);
         ResponseEntity<TimeEntry> responseEntity;
@@ -36,7 +37,7 @@ public class TimeEntryController {
         return responseEntity;
     }
 
-    @PutMapping("/time-entries/{id}")
+    @PutMapping("{id}")
     public ResponseEntity<TimeEntry> update(@PathVariable(name="id")long timeEntryId, @RequestBody TimeEntry expected) {
         TimeEntry timeEntry = timeEntryRepository.update(timeEntryId, expected);
         ResponseEntity<TimeEntry> responseEntity;
@@ -48,14 +49,14 @@ public class TimeEntryController {
         return responseEntity;
     }
 
-    @GetMapping("/time-entries")
+    @GetMapping
     public ResponseEntity<List<TimeEntry>> list() {
         List<TimeEntry> timeEntries = timeEntryRepository.list();
         ResponseEntity<List<TimeEntry>> responseEntity = new ResponseEntity<>(timeEntries, HttpStatus.OK);
         return responseEntity;
     }
 
-    @DeleteMapping("/time-entries/{id}")
+    @DeleteMapping("{id}")
     public ResponseEntity<TimeEntry> delete(@PathVariable(name="id")long timeEntryId) {
         timeEntryRepository.delete(timeEntryId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
