@@ -9,10 +9,16 @@ import javax.sql.DataSource;
 @SpringBootApplication
 public class PalTrackerApplication {
 
+//    @Bean
+//    public TimeEntryRepository getTimeEntryRepository(DataSource dataSource) {
+//        return new JdbcTimeEntryRepository(dataSource);
+//    }
+
     @Bean
-    public TimeEntryRepository getTimeEntryRepository(DataSource dataSource) {
-        return new JdbcTimeEntryRepository(dataSource);
-    }
+        public TimeEntryRepository getTimeEntryRepository(JpaTimeEntryRepository jpaTimeEntryRepository) {
+            return new JpaTimeEntryRepositoryWrapper(jpaTimeEntryRepository);
+        }
+
 
     public static void main(String [] args) {
         SpringApplication.run(PalTrackerApplication.class, args);

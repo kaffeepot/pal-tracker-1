@@ -2,11 +2,18 @@ package io.pivotal.pal.tracker;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.time.LocalDate;
 import java.util.Objects;
 
+@Entity(name = "time_entries")
 public class TimeEntry {
 
+    @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private long id;
     private long projectId;
     private long userId;
