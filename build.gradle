@@ -18,6 +18,7 @@ buildscript {
 plugins {
     id "java"
     id "org.flywaydb.flyway" version "5.2.4"
+    id "com.gorylenko.gradle-git-properties" version "1.5.1"
 }
 
 
@@ -51,6 +52,7 @@ bootRun.environment([
         "SPRING_DATASOURCE_URL": developmentDbUrl,
         "MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE": "*",
         "MANAGEMENT_ENDPOINT_HEALTH_SHOWDETAILS": "always",
+        "MANAGEMENT_INFO_GIT_MODE": "full",
 ])
 
 def testDbUrl = "jdbc:mysql://localhost:3306/tracker_test?user=tracker&useSSL=false&useTimezone=true&serverTimezone=UTC&useLegacyDatetimeCode=false"
@@ -59,6 +61,7 @@ test.environment([
         "SPRING_DATASOURCE_URL": testDbUrl,
         "MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE": "*",
         "MANAGEMENT_ENDPOINT_HEALTH_SHOWDETAILS": "always",
+        "MANAGEMENT_INFO_GIT_MODE": "full",
 ])
 
 flyway {
